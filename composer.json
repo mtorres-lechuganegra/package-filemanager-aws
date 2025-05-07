@@ -1,0 +1,31 @@
+{
+    "name": "lechuganegra/filemanager-aws",
+    "description": "Paquete de gestión de archivos con AWS para Laravel.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Marco Torres",
+            "email": "marquillo01@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LechugaNegra\\AwsFileManager\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "illuminate/support": "^11.0"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LechugaNegra\\AwsFileManager\\Providers\\AwsFileManagerProvider"
+            ]
+        }
+    },
+    "version": "1.0.0"
+}
