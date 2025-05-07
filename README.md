@@ -111,7 +111,7 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
     php artisan route:cache
     ```
     
-10.  **Regenerar clases:**
+8.  **Regenerar clases:**
 
     Regenerar las clases con el cargador automático "autoload"
 
