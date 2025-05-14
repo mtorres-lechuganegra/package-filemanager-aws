@@ -37,7 +37,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"path\": \"uploads/documents/invoice_2025_001.pdf\"\r\n}",
+							"raw": "{\r\n  \"filename\": \"s3_aws.jpg\",\r\n  \"content_type\": \"image/jpeg\",\r\n  \"acl\": \"public-read\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,7 +91,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"path\": \"uploads/documents/invoice_2025_001.pdf\"\r\n}",
+							"raw": "{\r\n  \"path\": \"67fef5b2-e717-4088-baeb-289041fccdcc_s3_aws.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -140,7 +140,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"path\": \"uploads/documents/invoice_2025_001.pdf\"\r\n}",
+							"raw": "{\r\n  \"path\": \"67fef5b2-e717-4088-baeb-289041fccdcc_s3_aws.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
