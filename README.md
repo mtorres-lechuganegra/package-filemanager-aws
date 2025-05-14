@@ -85,17 +85,32 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
     AWS_DEFAULT_REGION=us-east-1
     AWS_BUCKET=your-bucket-name
     AWS_URL=https://your-bucket.s3.amazonaws.com
+    AWS_VISIBILITY=private
+    AWS_TTL_URL_UPLOAD=1
+    AWS_TTL_URL_DOWNLOAD=1
     ```
 
-6.  **Configurar el s3:**
+    La variable `AWS_VISIBILITY` no es necesaria si el Bucket de AWS tiene habilitado el ACL.
 
-    Edita el archivo `config/filesystems.php` y en `s3` dentro de `disk`, agregar la visibilidad del buket comunicación con las variables de entorno:
+6.  **Verificar configuración s3:**
+
+    Verificar que el archivo `config/filesystems.php` en `s3` tenga los siguientes valores:
 
     ```php
     'disk' => [
         's3' => [
             ...
-            'visibility' => 'private'
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'visibility' => env('AWS_VISIBILITY', 'private'),
+            'ttl' => [
+                'url_upload' => env('AWS_TTL_URL_UPLOAD', '1'),
+                'url_download' => env('AWS_TTL_URL_DOWNLOAD', '1')
+            ]
+            ...
         ]
     ],
     ```
@@ -123,23 +138,6 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
 
 ### Endpoints del Servicio
 
-Puede importar el archivo `postman_collection.json` que se ubica en la carpeta `docs` de la raíz del paquete.
+Son 3 endpoints destinados a la generación de URL de subida, de descarga y a la eliminación de archivo, su uso está sujeto a la configuración del bucket.
 
-### Middleware de Autenticación
-
-Para proteger tus rutas con el middleware de autenticación, utiliza `auth:api` y `guard:api`:
-
-```php
-Route::middleware(['auth:api', 'guard:api'])->group(function () {
-    // Rutas protegidas
-});
-```
-
-### reCaptcha
-
-Para poder usar el endpoint de `login` con validación de reCaptcha, deberás agregar las credenciales en tu archivo .env:
-
-```nginx
-RECAPTCHA_ENABLED=true
-RECAPTCHA_SECRET_KEY=tu_secret_key_aqui
-```
+PDT: No usar `acl` en el request de generación de URL de subida si no está habilitado en tu configuración del bucket.

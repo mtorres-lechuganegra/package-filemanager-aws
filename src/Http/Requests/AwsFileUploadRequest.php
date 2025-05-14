@@ -4,7 +4,7 @@ namespace LechugaNegra\AwsFileManager\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AwsFilePathRequest extends FormRequest
+class AwsFileUploadRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,15 +14,16 @@ class AwsFilePathRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'path' => 'required|string',
+            'filename' => 'required|string',
+            'content_type' => 'required|string',
         ];
     }
-    
+
     public function messages(): array
     {
         return [
-            'path.required' => 'The file path is required.',
-            'path.string'   => 'The file path must be a valid string.',
+            'filename.required' => 'The filename is required.',
+            'content_type.required' => 'The content type is required.',
         ];
     }
 }
