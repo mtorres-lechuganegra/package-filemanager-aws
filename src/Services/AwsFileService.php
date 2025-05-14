@@ -15,11 +15,15 @@ class AwsFileService
      *
      * @param string $path
      * @param int $ttlMinutes
-     * @return string
+     * @param string $acl
+     * @param int $ttlMinutes
+     * @param string|null $folder
+     * @return array
      */
-    public function generateUploadUrl(string $originalFilename, string $contentType, string $acl, int $ttlMinutes = 1): array
+    public function generateUploadUrl(string $originalFilename, string $contentType, string $acl, int $ttlMinutes = 1, ?string $folder = null): array
     {
         $filename = Str::uuid() . '_' . $originalFilename;
+        $path = $folder ? trim($folder, '/') . '/' . $filename : $filename;
 
         // Construir Cliente S3
         $client = new S3Client([
@@ -34,7 +38,7 @@ class AwsFileService
         // Procesar datos
         $data = [
             'Bucket' => config('filesystems.disks.s3.bucket'),
-            'Key' => $filename,
+            'Key' => $path,
             'ContentType' => $contentType
         ];
         if ($acl) {
@@ -48,16 +52,10 @@ class AwsFileService
         $request = $client->createPresignedRequest($command, '+' . $ttlMinutes . ' minutes');
         $url = (string) $request->getUri();
 
-        // Armar ruta pública según ACL
-        $publicURL = '';
-        if ($acl == 'public-read') {
-            $publicURL = config('filesystems.disks.s3.url') . '/' . $filename;
-        }
-
         return [
             'url' => $url,
             'filename' => $filename,
-            'public_url' => $publicURL
+            'path' => $path
         ];
     }
 

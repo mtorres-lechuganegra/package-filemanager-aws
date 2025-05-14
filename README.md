@@ -140,4 +140,4 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
 
 Son 3 endpoints destinados a la generación de URL de subida, de descarga y a la eliminación de archivo, su uso está sujeto a la configuración del bucket.
 
-PDT: No usar `acl` en el request de generación de URL de subida si no está habilitado en tu configuración del bucket.
+PDT: No usar parámetro `acl` o `folder` en el request de generación de URL de subida de archivo si no cuenta con los permisos otorgados en la configuración del bucket.

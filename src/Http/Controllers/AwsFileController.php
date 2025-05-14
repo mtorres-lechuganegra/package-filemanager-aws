@@ -38,7 +38,8 @@ class AwsFileController extends Controller
             $data['filename'],
             $data['content_type'],
             $data['acl'] ?? '',
-            config('filesystems.disks.ttl.url_upload', 1)
+            config('filesystems.disks.ttl.url_upload', 1),
+            $data['folder'] ?? '',
         );
         return response()->json([
             'upload' => $result
