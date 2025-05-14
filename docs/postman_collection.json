@@ -37,7 +37,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"filename\": \"s3_aws.jpg\",\r\n  \"content_type\": \"image/jpeg\",\r\n  \"acl\": \"public-read\"\r\n}",
+							"raw": "{\r\n  \"folder\": \"source_page\",\r\n  \"filename\": \"s3_aws.jpg\",\r\n  \"content_type\": \"image/jpeg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
