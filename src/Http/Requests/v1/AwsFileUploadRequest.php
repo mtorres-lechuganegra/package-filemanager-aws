@@ -1,6 +1,6 @@
 <?php
 
-namespace LechugaNegra\AwsFileManager\Http\Requests;
+namespace LechugaNegra\AwsFileManager\Http\Requests\v1;
 
 use Illuminate\Foundation\Http\FormRequest;
 

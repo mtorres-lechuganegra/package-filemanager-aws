@@ -73,7 +73,18 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
 
     Este comando descargará el paquete y actualizará tu archivo `composer.json`.
 
-5.  **Agregar variables de entorno:**
+5.  **Publicar archivo de configuración:**
+
+    Ejecuta el siguiente comando para copiar los archivos de configuración del paquete a la carpeta `config` del proyecto::
+
+    ```bash
+    php artisan vendor:publish --tag=filemanageraws-config
+    
+    ```
+    
+    Esto te permitirá personalizar el comportamiento del paquete desde tu proyecto.
+
+6.  **Agregar variables de entorno:**
 
     Agregar las variables de eneotnor de FILASYSTEM y credenciales AWS en .env:
 
@@ -92,7 +103,7 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
 
     La variable `AWS_VISIBILITY` no es necesaria si el Bucket de AWS tiene habilitado el ACL.
 
-6.  **Verificar configuración s3:**
+7.  **Verificar configuración s3:**
 
     Verificar que el archivo `config/filesystems.php` en `s3` tenga los siguientes valores:
 
@@ -115,7 +126,7 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
     ],
     ```
 
-7.  **Limpiar la caché:**
+8.  **Limpiar la caché:**
 
     Limpia la caché de configuración y rutas para asegurar que los cambios se apliquen correctamente:
 
@@ -126,7 +137,7 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
     php artisan route:cache
     ```
     
-8.  **Regenerar clases:**
+9.  **Regenerar clases:**
 
     Regenerar las clases con el cargador automático "autoload"
 
@@ -136,8 +147,17 @@ Este paquete de Laravel proporciona la gestión de archivos con servicio S3 de A
 
 ## Uso
 
+### Variable de Versión
+
+Puede determinar el uso de versión del paquete.
+
+```nginx
+FILE_MANAGER_AWS_VERSION=v1
+```
+La versión puede cambiar la estructura y uso de los servicios.
+
 ### Endpoints del Servicio
 
-Son 3 endpoints destinados a la generación de URL de subida, de descarga y a la eliminación de archivo, su uso está sujeto a la configuración del bucket.
+Puede importar el archivo `postman_collection_{version}.json` que se ubica en la carpeta `docs` de la raíz del paquete.
 
 PDT: No usar parámetro `acl` o `folder` en el request de generación de URL de subida de archivo si no cuenta con los permisos otorgados en la configuración del bucket.

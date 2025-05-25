@@ -1,12 +1,10 @@
 <?php
 
-namespace LechugaNegra\AwsFileManager\Http\Controllers;
+namespace LechugaNegra\AwsFileManager\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use LechugaNegra\AwsFileManager\Http\Requests\AwsFilePathRequest;
-use LechugaNegra\AwsFileManager\Http\Requests\AwsFileUploadRequest;
+use LechugaNegra\AwsFileManager\Http\Requests\v1\AwsFilePathRequest;
+use LechugaNegra\AwsFileManager\Http\Requests\v1\AwsFileUploadRequest;
 use LechugaNegra\AwsFileManager\Services\AwsFileService;
 
 class AwsFileController extends Controller
