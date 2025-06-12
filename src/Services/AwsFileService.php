@@ -25,15 +25,24 @@ class AwsFileService
         $filename = Str::uuid() . '_' . $originalFilename;
         $path = $folder ? trim($folder, '/') . '/' . $filename : $filename;
 
-        // Construir Cliente S3
-        $client = new S3Client([
+        // Detecta si se deben usar credenciales explícitas
+        $useExplicitCredentials = app()->environment('local') || app()->environment('qa');
+
+        // Armamos variable de configuración
+        $config = [
             'region' => config('filesystems.disks.s3.region'),
-            'version' => 'latest',
-            'credentials' => [
+            'version' => 'latest'
+        ];
+
+        if ($useExplicitCredentials) {
+            $config['credentials'] = [
                 'key' => config('filesystems.disks.s3.key'),
-                'secret' => config('filesystems.disks.s3.secret'),
-            ],
-        ]);
+                'secret' => config('filesystems.disks.s3.secret')
+            ];
+        }
+
+        // Construir Cliente S3
+        $client = new S3Client($config);
 
         // Procesar datos
         $data = [
