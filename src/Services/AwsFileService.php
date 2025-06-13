@@ -25,19 +25,20 @@ class AwsFileService
         $filename = Str::uuid() . '_' . $originalFilename;
         $path = $folder ? trim($folder, '/') . '/' . $filename : $filename;
 
-        // Detecta si se deben usar credenciales explícitas
-        $useExplicitCredentials = app()->environment('local') || app()->environment('qa');
-
         // Armamos variable de configuración
         $config = [
             'region' => config('filesystems.disks.s3.region'),
             'version' => 'latest'
         ];
 
-        if ($useExplicitCredentials) {
+        // Solo agrega credentials si ambas claves existen
+        $accessKey = config('filesystems.disks.s3.key');
+        $secretKey = config('filesystems.disks.s3.secret');
+
+        if ($accessKey && $secretKey) {
             $config['credentials'] = [
-                'key' => config('filesystems.disks.s3.key'),
-                'secret' => config('filesystems.disks.s3.secret')
+                'key' => $accessKey,
+                'secret' => $secretKey,
             ];
         }
 
